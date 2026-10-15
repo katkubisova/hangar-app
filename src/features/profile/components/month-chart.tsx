@@ -30,7 +30,7 @@ export function MonthChart({ months }: { months: MonthCount[] }) {
 							)}
 							<span
 								className={cn(
-									"w-full max-w-9 transition-colors",
+									"w-full max-w-6 transition-colors",
 									isSelected ? "bg-electric-violet" : "bg-foreground"
 								)}
 								style={{

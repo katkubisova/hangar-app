@@ -24,7 +24,7 @@ export function ProfileScreen() {
 	return (
 		<Screen title="Profil">
 			{user && (
-				<div className="mx-4 mb-8 flex items-center gap-4 border bg-card p-4">
+				<div className="mx-4 flex items-center gap-4 border bg-card p-4">
 					<span
 						aria-hidden="true"
 						className="flex size-14 shrink-0 items-center justify-center bg-gradient-pastel-violet text-h3 font-bold"

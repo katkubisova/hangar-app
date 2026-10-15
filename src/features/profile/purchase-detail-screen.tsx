@@ -11,6 +11,15 @@ import { getProduct } from "@/lib/data/products"
 import { useDemoState } from "@/lib/demo/context"
 import { cn, formatDate, formatPrice } from "@/lib/utils"
 
+// A stable, made-up receipt number derived from the purchase id.
+function receiptNumber(id: string) {
+	let hash = 7
+	for (const char of id) {
+		hash = (hash * 31 + char.charCodeAt(0)) % 100_000_000
+	}
+	return `2026${String(hash).padStart(8, "0")}`
+}
+
 export function PurchaseDetailScreen({ purchaseId }: { purchaseId: string }) {
 	const { purchases, paymentCards } = useDemoState()
 	const purchase = purchases.find(item => item.id === purchaseId)
@@ -32,10 +41,7 @@ export function PurchaseDetailScreen({ purchaseId }: { purchaseId: string }) {
 		["Zaplaceno", formatPrice(purchase.amount)],
 		// A card removed since then is shown generically.
 		["Platební karta", card ? cardLabel(card) : "Odebraná karta"],
-		[
-			"Číslo dokladu",
-			purchase.id.replace(/\D/g, "").slice(-8).padStart(8, "0"),
-		],
+		["Číslo dokladu", receiptNumber(purchase.id)],
 	]
 
 	return (
