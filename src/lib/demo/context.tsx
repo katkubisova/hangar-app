@@ -3,6 +3,12 @@
 import { createContext, use, useCallback, useEffect, useState } from "react"
 
 import { DEMO_PUSH } from "@/lib/data/notifications"
+import {
+	addPaymentCard as addPaymentCardToState,
+	cancelRenewal as cancelRenewalInState,
+	type NewCardInput,
+	purchaseProduct,
+} from "@/lib/demo/purchase"
 import { createScenarioState, DEFAULT_SCENARIO } from "@/lib/demo/scenarios"
 import { createSignedUpState } from "@/lib/demo/sign-up"
 import { loadDemoState, saveDemoState } from "@/lib/demo/storage"
@@ -34,6 +40,14 @@ interface DemoContextValue {
 	) => void
 	sendPush: () => void
 	dismissPush: () => void
+	// Simulated payment. Fails once when the demo panel's "payment error
+	// on next checkout" is on (the switch then turns itself off).
+	purchase: (
+		productId: string,
+		paymentCardId: string
+	) => { ok: true; ownedId: string } | { ok: false }
+	cancelRenewal: (ownedId: string) => void
+	addPaymentCard: (input: NewCardInput) => string
 }
 
 const DemoContext = createContext<DemoContextValue | null>(null)
@@ -128,6 +142,39 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 
 	const dismissPush = useCallback(() => setPush(null), [])
 
+	// These read the current state to return a result right away, so they
+	// aren't memoised like the setters above.
+	function purchase(productId: string, paymentCardId: string) {
+		if (!state) {
+			return { ok: false } as const
+		}
+		if (state.system.paymentErrorNextCheckout) {
+			setState({
+				...state,
+				system: { ...state.system, paymentErrorNextCheckout: false },
+			})
+			return { ok: false } as const
+		}
+		const result = purchaseProduct(state, productId, paymentCardId)
+		setState(result.state)
+		return { ok: true, ownedId: result.ownedId } as const
+	}
+
+	function addPaymentCard(input: NewCardInput) {
+		if (!state) {
+			return ""
+		}
+		const result = addPaymentCardToState(state, input)
+		setState(result.state)
+		return result.cardId
+	}
+
+	const cancelRenewal = useCallback(
+		(ownedId: string) =>
+			update(current => cancelRenewalInState(current, ownedId)),
+		[update]
+	)
+
 	return (
 		<DemoContext
 			value={{
@@ -144,6 +191,9 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 				setPermission,
 				sendPush,
 				dismissPush,
+				purchase,
+				cancelRenewal,
+				addPaymentCard,
 			}}
 		>
 			{children}

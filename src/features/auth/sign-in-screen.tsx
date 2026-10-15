@@ -3,16 +3,12 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useId } from "react"
-
+import { TextField } from "@/components/form/text-field"
 import { Screen } from "@/components/shell/screen"
 import { Button } from "@/components/ui/button"
-import { TextField } from "@/features/auth/components/text-field"
-import { useForm } from "@/features/auth/use-form"
-import {
-	validateEmail,
-	validatePasswordFilled,
-} from "@/features/auth/validation"
+import { useForm } from "@/hooks/use-form"
 import { useDemo } from "@/lib/demo/context"
+import { validateEmail, validatePasswordFilled } from "@/lib/form/validation"
 
 // Any well-formed e-mail and any password pass (prototype).
 export function SignInScreen() {
