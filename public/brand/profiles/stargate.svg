@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Vrstva_2" data-name="Vrstva 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.85 207.83">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #fafafa;
+        stroke-width: .9px;
+      }
+
+      .cls-2 {
+        fill: #0d0d0d;
+      }
+    </style>
+  </defs>
+  <g id="Vrstva_1-2" data-name="Vrstva 1">
+    <g>
+      <path class="cls-2" d="M195.2,48.33L.85.67l23.32,45.48,21.07,51.87,15.4,59.4,4.05,49.95h85.71l16.37-17.89-4.59-53.61,7.45-35.55,13.18-27.52,12.37-24.49Z"/>
+      <path class="cls-1" d="M195.2,48.33l-29.86,35.03-14.93,32.73-8.32,41.34,8.32,49.95"/>
+      <path class="cls-1" d="M142.09,157.43l20.35-21.43"/>
+      <path class="cls-1" d="M150.41,116.09l19.23-15.75"/>
+      <path class="cls-1" d="M165.34,83.36l18.56-12.66"/>
+    </g>
+  </g>
+</svg>

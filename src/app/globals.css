@@ -1,0 +1,300 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* A section with class="dark" flips to the black brand surface: every
+   token below is redefined under .dark, so components inside it follow. */
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------
+   HANGAR brand tokens (HANGAR_Brand_Guidelines_2026.pdf, ch. 03–04)
+   ------------------------------------------------------------------ */
+@theme {
+	/* Primary palette. Alabaster and Cod Gray carry surfaces and text;
+	   the three accents are signals only, never large fills. */
+	--color-alabaster: #fafafa;
+	--color-cod-gray: #0d0d0d;
+	--color-electric-violet: #6034ff;
+	--color-trinidad: #f25d0d;
+	--color-orient: #006b8f;
+
+	/* Secondary palette, for UI and print. */
+	--color-violet-light: #e2cbff;
+	--color-orange-light: #faded2;
+	--color-blue-light: #cceaff;
+	--color-violet: #716de3;
+	--color-orange: #df763e;
+	--color-blue: #2595bb;
+
+	/* Type. N27 is the brand's heading face but has no web licence yet,
+	   so --font-display falls back to Geist. Swapping it in later is a
+	   one-line change here. */
+	--font-display: var(--font-sans);
+
+	/* Brand type scale: headings 120 % line height and −4 % tracking,
+	   body 140 % and −2 %.
+	   The app is always phone-sized, so the website's fluid (vw-based)
+	   sizes are fixed at their mobile end: vw would follow the desktop
+	   window, not the phone frame. */
+	--text-display: 2.75rem;
+	--text-display--line-height: 1;
+	--text-h1: 2rem;
+	--text-h1--line-height: 1.1;
+	--text-h2: 1.5rem;
+	--text-h2--line-height: 1.2;
+	--text-h3: 1.125rem;
+	--text-h3--line-height: 1.2;
+	--text-lead: 1.125rem;
+	--text-lead--line-height: 1.4;
+	--text-eyebrow: 0.75rem;
+	--text-eyebrow--line-height: 1.2;
+
+	--tracking-heading: -0.04em;
+	--tracking-body: -0.02em;
+	--tracking-eyebrow: 0.06em;
+}
+
+/* Gradients (guide p. 44–47), running from the top-left colour to the
+   bottom-right one. Saturated ones are for events, posters and
+   Challenger; soft ones for everyday UI. Never on text. */
+@utility bg-gradient-violet-trinidad {
+	background-image: linear-gradient(160deg, #6034ff, #f25d0d);
+}
+@utility bg-gradient-violet-orient {
+	background-image: linear-gradient(160deg, #6034ff, #2595bb);
+}
+@utility bg-gradient-orient-trinidad {
+	background-image: linear-gradient(160deg, #2595bb, #f25d0d);
+}
+@utility bg-gradient-soft-violet {
+	background-image: linear-gradient(160deg, #e2cbff, #6034ff);
+}
+@utility bg-gradient-soft-orange {
+	background-image: linear-gradient(160deg, #faded2, #f2600d);
+}
+@utility bg-gradient-soft-blue {
+	background-image: linear-gradient(160deg, #cceaff, #006b8f);
+}
+@utility bg-gradient-pastel-violet {
+	background-image: linear-gradient(160deg, #e2cbff, #716de3);
+}
+@utility bg-gradient-pastel-orange {
+	background-image: linear-gradient(160deg, #faded2, #df763e);
+}
+@utility bg-gradient-pastel-blue {
+	background-image: linear-gradient(160deg, #cceaff, #2595bb);
+}
+
+/* Small uppercase label above a heading, as on every guide page. */
+@utility eyebrow {
+	font-size: var(--text-eyebrow);
+	line-height: var(--text-eyebrow--line-height);
+	letter-spacing: var(--tracking-eyebrow);
+	text-transform: uppercase;
+	font-weight: 500;
+	color: var(--muted-foreground);
+}
+
+/* Inline text link. The brand forbids underlined text, so links are
+   marked by colour and weight, plus a clear focus ring. */
+@utility link {
+	color: var(--link);
+	font-weight: 500;
+	transition: color 150ms;
+	&:hover {
+		color: var(--foreground);
+	}
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: var(--font-sans);
+	--font-mono: var(--font-mono);
+	--font-heading: var(--font-display);
+	--color-link: var(--link);
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
+	--color-destructive: var(--destructive);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+	--radius-sm: calc(var(--radius) * 0.5);
+	--radius-md: calc(var(--radius) * 0.75);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) * 1.5);
+	--radius-2xl: calc(var(--radius) * 2);
+	--radius-3xl: calc(var(--radius) * 2.5);
+	--radius-4xl: calc(var(--radius) * 3);
+}
+
+/* Semantic tokens used by the components. Light: Alabaster surface,
+   Cod Gray text and primary actions, Electric Violet as the one
+   interactive signal (links, focus). */
+:root {
+	/* Square corners, matching the brand's sharp line icons. The radius
+	   scale below stays in place, so this is the one switch to change. */
+	--radius: 0rem;
+	--background: #fafafa;
+	--foreground: #0d0d0d;
+	--card: #ffffff;
+	--card-foreground: #0d0d0d;
+	--popover: #ffffff;
+	--popover-foreground: #0d0d0d;
+	--primary: #0d0d0d;
+	--primary-foreground: #fafafa;
+	--secondary: #eeeeee;
+	--secondary-foreground: #0d0d0d;
+	/* Panel grey from the guide's layouts. */
+	--muted: #eeeeee;
+	/* 6.3:1 on Alabaster (WCAG AA for body text). */
+	--muted-foreground: #5c5c5c;
+	--accent: #eeeeee;
+	--accent-foreground: #0d0d0d;
+	/* Trinidad is 3.1:1 on Alabaster: fine for borders and icons, too
+	   light for small error text. See the Phase 4 flags. */
+	--destructive: #f25d0d;
+	--border: #e2e2e2;
+	--input: #d6d6d6;
+	/* Electric Violet, 6.0:1 on Alabaster. */
+	--ring: #6034ff;
+	--link: #6034ff;
+}
+
+.dark {
+	--background: #0d0d0d;
+	--foreground: #fafafa;
+	--card: #1a1a1a;
+	--card-foreground: #fafafa;
+	--popover: #1a1a1a;
+	--popover-foreground: #fafafa;
+	--primary: #fafafa;
+	--primary-foreground: #0d0d0d;
+	--secondary: #262626;
+	--secondary-foreground: #fafafa;
+	--muted: #262626;
+	--muted-foreground: #a8a8a8;
+	--accent: #262626;
+	--accent-foreground: #fafafa;
+	--destructive: #f25d0d;
+	--border: #2e2e2e;
+	--input: #3a3a3a;
+	/* Light Violet: Electric Violet is too dark on Cod Gray. */
+	--ring: #e2cbff;
+	--link: #e2cbff;
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	html {
+		@apply font-sans;
+	}
+	body {
+		@apply bg-background text-foreground;
+		letter-spacing: var(--tracking-body);
+		line-height: 1.4;
+	}
+	.dark {
+		background-color: var(--background);
+		color: var(--foreground);
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-heading);
+		letter-spacing: var(--tracking-heading);
+		line-height: 1.2;
+		text-wrap: balance;
+	}
+	/* Page and section titles are set in capitals, as in the guide. */
+	h1,
+	h2 {
+		text-transform: uppercase;
+	}
+	::selection {
+		background-color: var(--color-violet-light);
+		color: var(--color-cod-gray);
+	}
+	:focus-visible {
+		outline: 2px solid var(--ring);
+		outline-offset: 2px;
+	}
+}
+
+/* TDesign injects ".t-icon { width: 1em; height: 1em }" outside any layer,
+   which beats Tailwind's size-* utilities. Hand sizing back to the layers;
+   an icon without a size class still gets 1em from its width attribute. */
+svg.t-icon {
+	width: revert-layer;
+	height: revert-layer;
+}
+
+/* ------------------------------------------------------------------
+   App shell: native-feeling mobile web
+   ------------------------------------------------------------------ */
+
+/* Safe areas. On a phone they come from the device (notch, home
+   indicator); inside the desktop phone frame, DeviceFrame sets them to
+   the iPhone's status bar and home indicator so the layout matches. */
+@utility pt-safe {
+	padding-top: var(--safe-top);
+}
+@utility pb-safe {
+	padding-bottom: var(--safe-bottom);
+}
+@utility top-safe {
+	top: var(--safe-top);
+}
+
+/* Lets a scroll area scroll without showing a scrollbar, like native. */
+@utility scrollbar-none {
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+/* Simulated operating-system UI (alerts, push banners) uses the phone's
+   own font, so it reads as "not Hangar". */
+@utility font-system {
+	font-family:
+		-apple-system, BlinkMacSystemFont, "SF Pro Text", Roboto, sans-serif;
+	letter-spacing: normal;
+}
+
+@layer base {
+	:root {
+		--safe-top: env(safe-area-inset-top, 0px);
+		--safe-bottom: env(safe-area-inset-bottom, 0px);
+	}
+	html,
+	body {
+		height: 100%;
+	}
+	/* Bold capitals for titles, as on the website (where each heading sets
+	   font-bold itself). */
+	h1,
+	h2 {
+		font-weight: 700;
+	}
+	body {
+		/* No rubber-band bounce or pull-to-refresh outside the app. */
+		overscroll-behavior: none;
+		-webkit-tap-highlight-color: transparent;
+		-webkit-text-size-adjust: 100%;
+		touch-action: manipulation;
+	}
+}
