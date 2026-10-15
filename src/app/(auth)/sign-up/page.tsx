@@ -1,5 +1,5 @@
-import { AuthPlaceholderScreen } from "@/features/auth/auth-placeholder-screen"
+import { SignUpScreen } from "@/features/auth/sign-up-screen"
 
 export default function SignUpPage() {
-	return <AuthPlaceholderScreen title="Registrace" />
+	return <SignUpScreen />
 }

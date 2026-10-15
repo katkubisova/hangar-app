@@ -6,6 +6,8 @@
 // only: the brand allows no filled variants.
 export type { IconProps } from "tdesign-icons-react"
 export {
+	BrowseIcon,
+	BrowseOffIcon,
 	CardmembershipIcon,
 	CheckIcon,
 	ChevronDownIcon,
@@ -17,6 +19,7 @@ export {
 	ImageIcon,
 	LoadingIcon,
 	LocationIcon,
+	MailIcon,
 	MapIcon,
 	NotificationIcon,
 	QrcodeIcon,

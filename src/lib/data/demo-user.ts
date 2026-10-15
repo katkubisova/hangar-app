@@ -9,6 +9,7 @@ export const demoUser: UserProfile = {
 	lastName: "Svobodová",
 	email: "tereza.svobodova@example.cz",
 	phone: "+420 777 123 456",
+	birthDate: "1994-05-12",
 	memberId: "HNG-204817",
 }
 

@@ -6,6 +6,8 @@ export interface UserProfile {
 	lastName: string
 	email: string
 	phone: string
+	// ISO date (YYYY-MM-DD).
+	birthDate: string
 	// Encoded in the check-in QR code. Fake, for the prototype only.
 	memberId: string
 }

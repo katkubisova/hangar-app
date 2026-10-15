@@ -11,7 +11,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 	const { state } = useDemo()
 
 	return (
-		<div className="relative flex h-full flex-col overflow-hidden bg-background text-foreground">
+		<div className="relative flex h-full flex-col overflow-clip bg-background text-foreground">
 			{/* Demo data only exists on the client. Until it's read, show the
 			    splash colour so the first paint matches the splash screen. */}
 			{state ? children : <div className="h-full bg-cod-gray" />}

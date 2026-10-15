@@ -14,6 +14,8 @@ interface ScreenProps {
 	// Replaces the header's left side (e.g. the gym switcher on Domů).
 	headerStart?: React.ReactNode
 	headerEnd?: React.ReactNode
+	// Pinned below the scroll area, e.g. a form's main button.
+	footer?: React.ReactNode
 	// Black surface (Vstup, Welcome).
 	dark?: boolean
 	children: React.ReactNode
@@ -28,6 +30,7 @@ export function Screen({
 	backLabel = "Zpět",
 	headerStart,
 	headerEnd,
+	footer,
 	dark = false,
 	children,
 	contentClassName,
@@ -76,6 +79,12 @@ export function Screen({
 				)}
 				{children}
 			</main>
+			{footer && (
+				// Above a tab bar the bar takes the safe area; see TabsLayout.
+				<div className="flex shrink-0 flex-col gap-2 border-t bg-background px-4 pt-3 pb-[calc(var(--footer-safe,var(--safe-bottom))+0.75rem)]">
+					{footer}
+				</div>
+			)}
 		</div>
 	)
 }

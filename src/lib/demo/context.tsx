@@ -4,11 +4,14 @@ import { createContext, use, useCallback, useEffect, useState } from "react"
 
 import { DEMO_PUSH } from "@/lib/data/notifications"
 import { createScenarioState, DEFAULT_SCENARIO } from "@/lib/demo/scenarios"
+import { createSignedUpState } from "@/lib/demo/sign-up"
 import { loadDemoState, saveDemoState } from "@/lib/demo/storage"
 import type { AppNotification } from "@/lib/types/app-notification"
 import type { DemoScenarioId } from "@/lib/types/demo-scenario"
 import type { DemoState } from "@/lib/types/demo-state"
 import type { GymSlug } from "@/lib/types/gym"
+import type { PermissionState } from "@/lib/types/permission-state"
+import type { SignUpInput } from "@/lib/types/sign-up-input"
 import type { SystemFlag } from "@/lib/types/system-flags"
 
 interface DemoContextValue {
@@ -21,6 +24,14 @@ interface DemoContextValue {
 	resetDemo: () => void
 	setSystemFlag: (flag: SystemFlag, value: boolean) => void
 	selectGym: (gym: GymSlug) => void
+	signIn: () => void
+	signOut: () => void
+	completeSignUp: (input: SignUpInput) => void
+	deleteAccount: () => void
+	setPermission: (
+		permission: keyof DemoState["permissions"],
+		value: PermissionState
+	) => void
 	sendPush: () => void
 	dismissPush: () => void
 }
@@ -68,6 +79,39 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 		[update]
 	)
 
+	// Any credentials pass. A user who signed out comes back with their
+	// data; with no account yet, sign-in loads the demo user.
+	const signIn = useCallback(() => {
+		setState(current =>
+			current?.user
+				? { ...current, isLoggedIn: true }
+				: createScenarioState("active-membership")
+		)
+	}, [])
+
+	const signOut = useCallback(
+		() => update(current => ({ ...current, isLoggedIn: false })),
+		[update]
+	)
+
+	const completeSignUp = useCallback((input: SignUpInput) => {
+		setState(createSignedUpState(input))
+	}, [])
+
+	const deleteAccount = useCallback(() => {
+		setState(createScenarioState("new-user"))
+		setPush(null)
+	}, [])
+
+	const setPermission = useCallback(
+		(permission: keyof DemoState["permissions"], value: PermissionState) =>
+			update(current => ({
+				...current,
+				permissions: { ...current.permissions, [permission]: value },
+			})),
+		[update]
+	)
+
 	const sendPush = useCallback(() => {
 		const notification: AppNotification = {
 			...DEMO_PUSH,
@@ -93,6 +137,11 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 				resetDemo,
 				setSystemFlag,
 				selectGym,
+				signIn,
+				signOut,
+				completeSignUp,
+				deleteAccount,
+				setPermission,
 				sendPush,
 				dismissPush,
 			}}
