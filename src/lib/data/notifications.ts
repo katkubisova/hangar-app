@@ -116,5 +116,5 @@ export const DEMO_PUSH: Omit<AppNotification, "createdAt" | "read"> = {
 	type: "gym-news",
 	title: "Nové bouldery v Brně",
 	body: "Stavěči v Hale A postavili 20 nových boulderů. Přijď je zkusit.",
-	href: "/notifications",
+	href: "/map/brno",
 }

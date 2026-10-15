@@ -61,6 +61,8 @@ interface DemoContextValue {
 	saveKid: (kid: KidAccount) => void
 	removeKid: (kidId: string) => void
 	setNotificationPref: (key: NotificationPrefKey, value: boolean) => void
+	markNotificationRead: (id: string) => void
+	markAllNotificationsRead: () => void
 }
 
 const DemoContext = createContext<DemoContextValue | null>(null)
@@ -201,6 +203,21 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 			update(current => profileEdits.saveKid(current, kid)),
 		removeKid: (kidId: string) =>
 			update(current => profileEdits.removeKid(current, kidId)),
+		markNotificationRead: (id: string) =>
+			update(current => ({
+				...current,
+				notifications: current.notifications.map(item =>
+					item.id === id ? { ...item, read: true } : item
+				),
+			})),
+		markAllNotificationsRead: () =>
+			update(current => ({
+				...current,
+				notifications: current.notifications.map(item => ({
+					...item,
+					read: true,
+				})),
+			})),
 		setNotificationPref: (key: NotificationPrefKey, value: boolean) =>
 			update(current => ({
 				...current,

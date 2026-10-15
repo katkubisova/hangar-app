@@ -2,6 +2,7 @@
 
 import { OverlayRoot } from "@/components/shell/overlay"
 import { PushBanner } from "@/components/shell/push-banner"
+import { SystemOverlays } from "@/features/system/system-overlays"
 import { useDemo } from "@/lib/demo/context"
 
 // The app's own viewport: fills the phone (or the phone frame), never
@@ -16,6 +17,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 			    splash colour so the first paint matches the splash screen. */}
 			{state ? children : <div className="h-full bg-cod-gray" />}
 			<OverlayRoot />
+			<SystemOverlays />
 			<PushBanner />
 		</div>
 	)

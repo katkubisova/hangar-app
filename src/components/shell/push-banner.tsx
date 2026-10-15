@@ -12,7 +12,7 @@ const AUTO_DISMISS_MS = 6000
 // Simulated iOS push notification, sent from the demo panel. Slides in
 // from the top of the app; tapping it opens the linked screen.
 export function PushBanner() {
-	const { push, dismissPush } = useDemo()
+	const { push, dismissPush, markNotificationRead } = useDemo()
 	const router = useRouter()
 
 	useEffect(() => {
@@ -33,6 +33,7 @@ export function PushBanner() {
 				type="button"
 				onClick={() => {
 					dismissPush()
+					markNotificationRead(push.id)
 					router.push(push.href)
 				}}
 				className="pointer-events-auto flex w-full gap-3 rounded-[22px] bg-white/85 p-3 text-left font-system text-black shadow-lg backdrop-blur-xl active:bg-white/70"

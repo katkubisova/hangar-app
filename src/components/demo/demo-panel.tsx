@@ -15,13 +15,11 @@ import { cn } from "@/lib/utils"
 
 const SCENARIOS = Object.keys(SCENARIO_LABEL) as DemoScenarioId[]
 
-// Which build step makes each switch do something. Until then it's stored
-// but has no visible effect, and the panel says so.
-const SYSTEM_FLAGS: { flag: SystemFlag; label: string; step?: number }[] = [
-	{ flag: "maintenance", label: "Údržba", step: 7 },
-	{ flag: "forcedUpdate", label: "Vynucená aktualizace", step: 7 },
-	{ flag: "recommendedUpdate", label: "Doporučená aktualizace", step: 7 },
-	{ flag: "feedbackPrompt", label: "Žádost o hodnocení", step: 7 },
+const SYSTEM_FLAGS: { flag: SystemFlag; label: string }[] = [
+	{ flag: "maintenance", label: "Údržba" },
+	{ flag: "forcedUpdate", label: "Vynucená aktualizace" },
+	{ flag: "recommendedUpdate", label: "Doporučená aktualizace" },
+	{ flag: "feedbackPrompt", label: "Žádost o hodnocení" },
 	{ flag: "blockedUser", label: "Blokovaný uživatel" },
 	{ flag: "paymentErrorNextCheckout", label: "Chyba platby při dalším nákupu" },
 ]
@@ -92,17 +90,10 @@ export function DemoPanel({ variant }: DemoPanelProps) {
 			<div>
 				<h3 className="eyebrow mb-2">Stavy systému</h3>
 				<ul className="flex flex-col border-t">
-					{SYSTEM_FLAGS.map(({ flag, label, step }) => (
+					{SYSTEM_FLAGS.map(({ flag, label }) => (
 						<li key={flag} className="border-b">
 							<div className="flex min-h-11 items-center justify-between gap-3 py-2">
-								<span>
-									<span className="block text-base">{label}</span>
-									{step && (
-										<span className="block text-xs text-muted-foreground">
-											Zatím bez efektu (krok {step})
-										</span>
-									)}
-								</span>
+								<span className="text-base">{label}</span>
 								<Switch
 									aria-label={label}
 									checked={state.system[flag]}
