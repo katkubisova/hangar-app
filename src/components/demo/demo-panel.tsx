@@ -17,12 +17,12 @@ const SCENARIOS = Object.keys(SCENARIO_LABEL) as DemoScenarioId[]
 
 // Which build step makes each switch do something. Until then it's stored
 // but has no visible effect, and the panel says so.
-const SYSTEM_FLAGS: { flag: SystemFlag; label: string; step: number }[] = [
+const SYSTEM_FLAGS: { flag: SystemFlag; label: string; step?: number }[] = [
 	{ flag: "maintenance", label: "Údržba", step: 7 },
 	{ flag: "forcedUpdate", label: "Vynucená aktualizace", step: 7 },
 	{ flag: "recommendedUpdate", label: "Doporučená aktualizace", step: 7 },
 	{ flag: "feedbackPrompt", label: "Žádost o hodnocení", step: 7 },
-	{ flag: "blockedUser", label: "Blokovaný uživatel", step: 3 },
+	{ flag: "blockedUser", label: "Blokovaný uživatel" },
 	{
 		flag: "paymentErrorNextCheckout",
 		label: "Chyba platby při dalším nákupu",
@@ -101,9 +101,11 @@ export function DemoPanel({ variant }: DemoPanelProps) {
 							<div className="flex min-h-11 items-center justify-between gap-3 py-2">
 								<span>
 									<span className="block text-base">{label}</span>
-									<span className="block text-xs text-muted-foreground">
-										Zatím bez efektu (krok {step})
-									</span>
+									{step && (
+										<span className="block text-xs text-muted-foreground">
+											Zatím bez efektu (krok {step})
+										</span>
+									)}
 								</span>
 								<Switch
 									aria-label={label}

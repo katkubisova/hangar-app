@@ -8,6 +8,7 @@ export type { IconProps } from "tdesign-icons-react"
 export {
 	BrowseIcon,
 	BrowseOffIcon,
+	CallIcon,
 	CardmembershipIcon,
 	CheckIcon,
 	ChevronDownIcon,
@@ -15,6 +16,7 @@ export {
 	ChevronRightIcon,
 	CloseIcon,
 	ErrorCircleIcon,
+	HelpCircleIcon,
 	HomeIcon,
 	ImageIcon,
 	LoadingIcon,
@@ -25,6 +27,8 @@ export {
 	QrcodeIcon,
 	SettingIcon,
 	ShopIcon,
+	SunnyIcon,
 	TimeIcon,
+	UserBlockedIcon,
 	UserIcon,
 } from "tdesign-icons-react"
