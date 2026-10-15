@@ -8,7 +8,9 @@ export default function TabsLayout({
 }) {
 	return (
 		<RequireLogin>
-			<div className="flex min-h-0 flex-1 flex-col">{children}</div>
+			<div className="flex min-h-0 flex-1 flex-col [--footer-safe:0px]">
+				{children}
+			</div>
 			<TabBar />
 		</RequireLogin>
 	)

@@ -50,7 +50,9 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="cs" className={cn("font-sans", geist.variable)}>
-			<body className={`${geist.variable} ${geistMono.variable} antialiased`}>
+			<body
+				className={`${geist.variable} ${geistMono.variable} bg-cod-gray antialiased`}
+			>
 				<DemoProvider>
 					<OverlayProvider>
 						<DeviceFrame>
