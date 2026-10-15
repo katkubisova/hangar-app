@@ -4,6 +4,7 @@ import type { DiscountCard } from "@/lib/types/discount-card"
 import type { Entry } from "@/lib/types/entry"
 import type { GymSlug } from "@/lib/types/gym"
 import type { KidAccount } from "@/lib/types/kid-account"
+import type { NotificationPrefs } from "@/lib/types/notification-prefs"
 import type { OwnedProduct } from "@/lib/types/owned-product"
 import type { PaymentCard } from "@/lib/types/payment-card"
 import type { PermissionState } from "@/lib/types/permission-state"
@@ -23,6 +24,7 @@ export interface DemoState {
 	paymentCards: PaymentCard[]
 	kids: KidAccount[]
 	discountCards: DiscountCard[]
+	notificationPrefs: NotificationPrefs
 	notifications: AppNotification[]
 	system: SystemFlags
 	permissions: {

@@ -3,6 +3,7 @@
 import { createContext, use, useCallback, useEffect, useState } from "react"
 
 import { DEMO_PUSH } from "@/lib/data/notifications"
+import * as profileEdits from "@/lib/demo/profile"
 import {
 	addPaymentCard as addPaymentCardToState,
 	cancelRenewal as cancelRenewalInState,
@@ -15,7 +16,10 @@ import { loadDemoState, saveDemoState } from "@/lib/demo/storage"
 import type { AppNotification } from "@/lib/types/app-notification"
 import type { DemoScenarioId } from "@/lib/types/demo-scenario"
 import type { DemoState } from "@/lib/types/demo-state"
+import type { DiscountCardType } from "@/lib/types/discount-card"
 import type { GymSlug } from "@/lib/types/gym"
+import type { KidAccount } from "@/lib/types/kid-account"
+import type { NotificationPrefKey } from "@/lib/types/notification-prefs"
 import type { PermissionState } from "@/lib/types/permission-state"
 import type { SignUpInput } from "@/lib/types/sign-up-input"
 import type { SystemFlag } from "@/lib/types/system-flags"
@@ -48,6 +52,15 @@ interface DemoContextValue {
 	) => { ok: true; ownedId: string } | { ok: false }
 	cancelRenewal: (ownedId: string) => void
 	addPaymentCard: (input: NewCardInput) => string
+	updateProfile: (edit: profileEdits.ProfileEdit) => void
+	setDefaultCard: (cardId: string) => void
+	updateCardExpiry: (cardId: string, expiry: string) => void
+	removeCard: (cardId: string) => void
+	addDiscountCard: (type: DiscountCardType, cardNumber: string) => void
+	removeDiscountCard: (type: DiscountCardType) => void
+	saveKid: (kid: KidAccount) => void
+	removeKid: (kidId: string) => void
+	setNotificationPref: (key: NotificationPrefKey, value: boolean) => void
 }
 
 const DemoContext = createContext<DemoContextValue | null>(null)
@@ -169,6 +182,32 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 		return result.cardId
 	}
 
+	const profileActions = {
+		updateProfile: (edit: profileEdits.ProfileEdit) =>
+			update(current => profileEdits.updateProfile(current, edit)),
+		setDefaultCard: (cardId: string) =>
+			update(current => profileEdits.setDefaultCard(current, cardId)),
+		updateCardExpiry: (cardId: string, expiry: string) =>
+			update(current => profileEdits.updateCardExpiry(current, cardId, expiry)),
+		removeCard: (cardId: string) =>
+			update(current => profileEdits.removeCard(current, cardId)),
+		addDiscountCard: (type: DiscountCardType, cardNumber: string) =>
+			update(current =>
+				profileEdits.addDiscountCard(current, type, cardNumber)
+			),
+		removeDiscountCard: (type: DiscountCardType) =>
+			update(current => profileEdits.removeDiscountCard(current, type)),
+		saveKid: (kid: KidAccount) =>
+			update(current => profileEdits.saveKid(current, kid)),
+		removeKid: (kidId: string) =>
+			update(current => profileEdits.removeKid(current, kidId)),
+		setNotificationPref: (key: NotificationPrefKey, value: boolean) =>
+			update(current => ({
+				...current,
+				notificationPrefs: { ...current.notificationPrefs, [key]: value },
+			})),
+	}
+
 	const cancelRenewal = useCallback(
 		(ownedId: string) =>
 			update(current => cancelRenewalInState(current, ownedId)),
@@ -194,6 +233,7 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 				purchase,
 				cancelRenewal,
 				addPaymentCard,
+				...profileActions,
 			}}
 		>
 			{children}
