@@ -40,7 +40,12 @@ export function Screen({
 	return (
 		<div
 			className={cn(
-				"flex min-h-0 flex-1 flex-col bg-background text-foreground duration-200 animate-in fade-in-0",
+				"flex min-h-0 flex-1 flex-col bg-background text-foreground animate-in",
+				// Native feel: pushed screens (with a back link) slide in from the
+				// right; tab roots and other screens fade in.
+				backHref
+					? "duration-300 fade-in-0 slide-in-from-right-12"
+					: "duration-200 fade-in-0",
 				dark && "dark"
 			)}
 		>
