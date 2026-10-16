@@ -1,5 +1,5 @@
-import { PlaceholderScreen } from "@/features/placeholder/placeholder-screen"
+import { MapScreen } from "@/features/map/map-screen"
 
 export default function MapPage() {
-	return <PlaceholderScreen title="Mapa" step={6} />
+	return <MapScreen />
 }
