@@ -1,5 +1,6 @@
 import type { AppNotification } from "@/lib/types/app-notification"
 import type { DemoScenarioId } from "@/lib/types/demo-scenario"
+import type { DiscountCard } from "@/lib/types/discount-card"
 import type { Entry } from "@/lib/types/entry"
 import type { GymSlug } from "@/lib/types/gym"
 import type { KidAccount } from "@/lib/types/kid-account"
@@ -21,6 +22,7 @@ export interface DemoState {
 	entries: Entry[]
 	paymentCards: PaymentCard[]
 	kids: KidAccount[]
+	discountCards: DiscountCard[]
 	notifications: AppNotification[]
 	system: SystemFlags
 	permissions: {

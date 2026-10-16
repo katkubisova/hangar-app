@@ -26,6 +26,9 @@ export function getOwnedProductStatus(
 	) {
 		return "expired"
 	}
+	if (new Date(owned.validFrom) > now) {
+		return "upcoming"
+	}
 	return "active"
 }
 

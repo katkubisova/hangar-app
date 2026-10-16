@@ -78,8 +78,10 @@ export function DeleteAccountScreen() {
 							Smazáním účtu ho nezrušíš, platba se dál obnovuje. Nejdřív zruš
 							opakovanou platbu.
 						</p>
-						{/* Moje produkty (with cancelling) arrives in step 4. */}
-						<Link href="/products" className="link mt-3 inline-block">
+						<Link
+							href={`/products/mine/${renewingMembership.id}`}
+							className="link mt-3 inline-block"
+						>
 							Zrušit členství
 						</Link>
 					</div>

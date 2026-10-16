@@ -4,15 +4,15 @@ import Link from "next/link"
 import { useId, useState } from "react"
 
 import { WallProfile } from "@/components/brand/wall-profile"
+import { TextField } from "@/components/form/text-field"
 import { Screen } from "@/components/shell/screen"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { CheckIcon } from "@/components/ui/icons"
-import { TextField } from "@/features/auth/components/text-field"
-import { useForm } from "@/features/auth/use-form"
+import { useForm } from "@/hooks/use-form"
 import {
 	validateNewPassword,
 	validatePasswordMatch,
-} from "@/features/auth/validation"
+} from "@/lib/form/validation"
 import { cn } from "@/lib/utils"
 
 // Opened from the reset link in the (simulated) e-mail. After saving, the

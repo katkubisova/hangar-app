@@ -5,6 +5,7 @@ import Link from "next/link"
 import { buttonVariants } from "@/components/ui/button"
 import { QrcodeIcon } from "@/components/ui/icons"
 import { getOpenGym } from "@/lib/data/gyms"
+import { productHref } from "@/lib/data/product-families"
 import type { OwnedProductWithDetails } from "@/lib/demo/owned-products"
 import type { GymSlug } from "@/lib/types/gym"
 import { cn, formatDate } from "@/lib/utils"
@@ -66,7 +67,7 @@ export function MembershipCard({ primary, selectedGym }: MembershipCardProps) {
 			)}
 
 			<Link
-				href={isActive ? "/qr" : "/products"}
+				href={isActive ? "/qr" : productHref(product.id)}
 				className={cn(buttonVariants({ size: "lg" }), "mt-5 w-full")}
 			>
 				{isActive ? (

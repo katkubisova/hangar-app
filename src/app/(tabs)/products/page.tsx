@@ -1,5 +1,5 @@
-import { PlaceholderScreen } from "@/features/placeholder/placeholder-screen"
+import { BuyScreen } from "@/features/products/buy-screen"
 
 export default function ProductsPage() {
-	return <PlaceholderScreen title="Produkty" step={4} />
+	return <BuyScreen />
 }

@@ -12,4 +12,5 @@ export interface OwnedProduct {
 	entriesUsed?: number
 }
 
-export type OwnedProductStatus = "active" | "expired"
+// "upcoming": bought, but starts later (after the running membership).
+export type OwnedProductStatus = "active" | "upcoming" | "expired"

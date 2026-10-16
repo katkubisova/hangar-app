@@ -2,13 +2,12 @@
 
 import { useRouter } from "next/navigation"
 import { useId } from "react"
-
+import { TextField } from "@/components/form/text-field"
 import { Screen } from "@/components/shell/screen"
 import { Button } from "@/components/ui/button"
 import { useAuthDraft } from "@/features/auth/auth-draft"
-import { TextField } from "@/features/auth/components/text-field"
-import { useForm } from "@/features/auth/use-form"
-import { validateEmail } from "@/features/auth/validation"
+import { useForm } from "@/hooks/use-form"
+import { validateEmail } from "@/lib/form/validation"
 
 export function ForgotPasswordScreen() {
 	const { draft, setDraft } = useAuthDraft()

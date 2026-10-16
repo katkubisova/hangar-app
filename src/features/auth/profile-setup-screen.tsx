@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect, useId } from "react"
+import { TextField } from "@/components/form/text-field"
 import { Screen } from "@/components/shell/screen"
 import { SegmentedControl } from "@/components/shell/segmented-control"
 import { Button } from "@/components/ui/button"
@@ -9,15 +10,14 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { FieldError } from "@/components/ui/field-error"
 import { useAuthDraft } from "@/features/auth/auth-draft"
 import { StepLabel } from "@/features/auth/components/step-label"
-import { TextField } from "@/features/auth/components/text-field"
-import { useForm } from "@/features/auth/use-form"
+import { useForm } from "@/hooks/use-form"
+import { openGyms } from "@/lib/data/gyms"
+import { useDemo } from "@/lib/demo/context"
 import {
 	validateBirthDate,
 	validatePhone,
 	validateRequired,
-} from "@/features/auth/validation"
-import { openGyms } from "@/lib/data/gyms"
-import { useDemo } from "@/lib/demo/context"
+} from "@/lib/form/validation"
 import type { GymSlug } from "@/lib/types/gym"
 
 const GYM_OPTIONS = openGyms.map(gym => ({ value: gym.slug, label: gym.city }))

@@ -23,11 +23,7 @@ const SYSTEM_FLAGS: { flag: SystemFlag; label: string; step?: number }[] = [
 	{ flag: "recommendedUpdate", label: "Doporučená aktualizace", step: 7 },
 	{ flag: "feedbackPrompt", label: "Žádost o hodnocení", step: 7 },
 	{ flag: "blockedUser", label: "Blokovaný uživatel" },
-	{
-		flag: "paymentErrorNextCheckout",
-		label: "Chyba platby při dalším nákupu",
-		step: 4,
-	},
+	{ flag: "paymentErrorNextCheckout", label: "Chyba platby při dalším nákupu" },
 ]
 
 interface DemoPanelProps {

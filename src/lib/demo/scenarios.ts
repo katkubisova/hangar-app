@@ -91,6 +91,7 @@ function loggedOutState(): Omit<DemoState, "scenario" | "notifications"> {
 		entries: [],
 		paymentCards: [],
 		kids: [],
+		discountCards: [],
 		system: SYSTEM_FLAGS_OFF,
 		permissions: { push: "not-asked", location: "not-asked" },
 	}

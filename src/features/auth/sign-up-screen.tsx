@@ -2,14 +2,13 @@
 
 import { useRouter } from "next/navigation"
 import { useId } from "react"
-
+import { TextField } from "@/components/form/text-field"
 import { Screen } from "@/components/shell/screen"
 import { Button } from "@/components/ui/button"
 import { useAuthDraft } from "@/features/auth/auth-draft"
 import { StepLabel } from "@/features/auth/components/step-label"
-import { TextField } from "@/features/auth/components/text-field"
-import { useForm } from "@/features/auth/use-form"
-import { validateEmail, validateNewPassword } from "@/features/auth/validation"
+import { useForm } from "@/hooks/use-form"
+import { validateEmail, validateNewPassword } from "@/lib/form/validation"
 
 export function SignUpScreen() {
 	const { draft, setDraft } = useAuthDraft()

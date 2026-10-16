@@ -3,7 +3,8 @@
 import Link from "next/link"
 
 import { BrandImage } from "@/components/brand/brand-image"
-import { getOpenGym } from "@/lib/data/gyms"
+import { productPhoto } from "@/features/products/product-photo"
+import { productHref } from "@/lib/data/product-families"
 import { getRecommendedProducts } from "@/lib/data/recommended-products"
 import type { GymSlug } from "@/lib/types/gym"
 import type { OwnedProduct } from "@/lib/types/owned-product"
@@ -15,12 +16,11 @@ interface RecommendedProductsProps {
 }
 
 // Swipeable row of suggested products for the selected gym. Each card
-// opens Produkty; product detail pages arrive in step 4.
+// opens its product detail.
 export function RecommendedProducts({
 	gymSlug,
 	activeOwned,
 }: RecommendedProductsProps) {
-	const gym = getOpenGym(gymSlug)
 	const products = getRecommendedProducts(gymSlug, activeOwned)
 
 	if (products.length === 0) {
@@ -39,14 +39,11 @@ export function RecommendedProducts({
 			</div>
 			<ul className="flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto overscroll-x-contain px-4 pb-1 scrollbar-none">
 				{products.map(product => {
-					const photo =
-						product.type === "membership"
-							? gym.heroImage
-							: (gym.galleryImages[0] ?? gym.heroImage)
+					const photo = productPhoto(product)
 					return (
 						<li key={product.id} className="w-[220px] shrink-0 snap-start">
 							<Link
-								href="/products"
+								href={productHref(product.id)}
 								className="block border bg-card active:opacity-80"
 							>
 								<BrandImage
