@@ -83,3 +83,27 @@ export function validateCardCvc(value: string) {
 		return "Zadej 3 číslice ze zadní strany karty."
 	}
 }
+
+// ISIC: a letter, 12 digits and a letter ("S 420 123 456 789 X").
+export function validateIsicNumber(value: string) {
+	if (!/^[A-Za-z]\d{12}[A-Za-z]$/.test(value.replace(/\s/g, ""))) {
+		return "Zadej číslo z průkazu ISIC, např. S 420 123 456 789 X."
+	}
+}
+
+export function validateMultisportNumber(value: string) {
+	if (value.replace(/\D/g, "").length < 8) {
+		return "Zadej číslo karty MultiSport (aspoň 8 číslic)."
+	}
+}
+
+export function validateBirthYear(value: string, today = new Date()) {
+	const year = Number(value)
+	if (
+		!/^\d{4}$/.test(value) ||
+		year > today.getFullYear() ||
+		year < today.getFullYear() - 18
+	) {
+		return "Zadej rok narození dítěte (posledních 18 let)."
+	}
+}
