@@ -23,7 +23,7 @@ describe("demo storage", () => {
 	})
 
 	it("ignores corrupt data", () => {
-		window.localStorage.setItem("hangar-app-demo-v3", "{not json")
+		window.localStorage.setItem("hangar-app-demo-v4", "{not json")
 		expect(loadDemoState()).toBeNull()
 	})
 })

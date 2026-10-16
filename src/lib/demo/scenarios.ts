@@ -92,6 +92,13 @@ function loggedOutState(): Omit<DemoState, "scenario" | "notifications"> {
 		paymentCards: [],
 		kids: [],
 		discountCards: [],
+		notificationPrefs: {
+			purchases: true,
+			membership: true,
+			payments: true,
+			gymNews: true,
+			appUpdates: false,
+		},
 		system: SYSTEM_FLAGS_OFF,
 		permissions: { push: "not-asked", location: "not-asked" },
 	}
