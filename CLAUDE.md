@@ -88,7 +88,7 @@ Real where we have it, realistic fake where we don't.
 Copy from hangar-web's `src/lib/data/` and `src/lib/types/`, then keep only the Czech (`cs`) side of localized fields:
 - `gyms.ts`: addresses, opening hours, contacts, links
 - `price-lists.ts`: verified cell for cell against the live sites. **Don't change any price.**
-- `benefit-cards.ts`: MultiSport, ISIC and other cards (for Slevy)
+- ~~`benefit-cards.ts`~~: not copied. In hangar-web it holds job-ad perks, not MultiSport/ISIC. The Slevy copy lives in `discount-card-info.ts` (from the price-list notes).
 - `faq-items.ts`: FAQ in Settings
 
 - **Gyms:** Brno and Ostrava are live. Praha, Plzeň and Olomouc are shown as "Připravujeme" (on the map list, not tappable into a detail). Add coordinates if hangar-web doesn't have them.
@@ -192,7 +192,7 @@ src/
     demo/          DemoPanel
   features/        home, qr, profile, products, map, notifications, system
   lib/
-    data/          gyms, price-lists, benefit-cards, faq-items, products, user, notifications
+    data/          gyms, price-lists, faq-items, products, product-families, demo-user, notifications
     demo/          context, scenarios, storage
     types/         one file per type
 ```
