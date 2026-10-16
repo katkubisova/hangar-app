@@ -1,10 +1,10 @@
 import { RequireLogin } from "@/features/auth/require-login"
-import { PlaceholderScreen } from "@/features/placeholder/placeholder-screen"
+import { NotificationsScreen } from "@/features/notifications/notifications-screen"
 
 export default function NotificationsPage() {
 	return (
 		<RequireLogin>
-			<PlaceholderScreen title="Notifikace" step={7} backHref="/home" />
+			<NotificationsScreen />
 		</RequireLogin>
 	)
 }

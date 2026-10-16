@@ -33,3 +33,27 @@ const MONTH_LOCATIVE = [
 export function inMonth(date: Date) {
 	return `v ${MONTH_LOCATIVE[date.getMonth()]}`
 }
+
+// "před 5 minutami", "včera", "před 3 dny"; older than a week as a date.
+export function timeAgo(iso: string, now: Date) {
+	const minutes = Math.floor((now.getTime() - new Date(iso).getTime()) / 60000)
+	if (minutes < 1) {
+		return "právě teď"
+	}
+	if (minutes < 60) {
+		return minutes === 1 ? "před minutou" : `před ${minutes} minutami`
+	}
+	const hours = Math.floor(minutes / 60)
+	if (hours < 24) {
+		return hours === 1 ? "před hodinou" : `před ${hours} hodinami`
+	}
+	const days = Math.floor(hours / 24)
+	if (days === 1) {
+		return "včera"
+	}
+	if (days < 7) {
+		return `před ${days} dny`
+	}
+	const date = new Date(iso)
+	return `${date.getDate()}. ${date.getMonth() + 1}. ${date.getFullYear()}`
+}
